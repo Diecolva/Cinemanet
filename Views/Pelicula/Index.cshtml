@@ -1,0 +1,73 @@
+@model IEnumerable<Cinemanet.Models.Domain.Pelicula>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<h1>Películas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Agregar <i class="bi bi-plus"></i> </a>
+</p>
+
+<table class="table table-borderless table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th style= "width: 500px";>
+                @Html.DisplayNameFor(model => model.Sinopsis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Caratula)
+            </th>
+            <th style= "width: 200px";>
+                @Html.DisplayNameFor(model => model.Generos)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pelicula in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => pelicula.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => pelicula.Sinopsis)
+                </td>
+                <td>
+                    <img src="@Url.Content(pelicula.Caratula)" alt="Carátula de la película" class="caratula"
+                        style="width: 100px; height: auto;">
+                </td>
+                <td>
+                    @foreach (var genero in pelicula.Generos)
+                    {
+                        <span>@genero.Nombre</span>
+                        @if (!genero.Equals(pelicula.Generos.Last()))
+                        {
+                            <span>, </span>
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@pelicula.Id"><i class="bi bi-pencil"></i>
+                        Editar</a>
+                    <a asp-action="Details" class="btn btn-primary" asp-route-id="@pelicula.Id"><i
+                            class="bi bi-info-circle"></i> Detalles</a>
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@pelicula.Id"><i class="bi bi-trash"></i>
+                        Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

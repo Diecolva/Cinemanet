@@ -1,0 +1,35 @@
+@model Cinemanet.Models.Domain.Genero
+
+@{
+    ViewData["Title"] = "Eliminar Género";
+}
+
+<h1>Eliminar Género</h1>
+
+<div>
+    <h4>Género</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+    </dl>
+
+    <h4>Películas relacionadas</h4>
+    <hr />
+    <ul>
+        @foreach (var pelicula in Model.Peliculas)
+        {
+            <li>@pelicula.Nombre</li>
+        }
+    </ul>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver a la Lista</a>
+    </form>
+</div>

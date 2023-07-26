@@ -1,0 +1,21 @@
+@model Cinemanet.Models.Domain.Genero
+
+@{
+    ViewData["Title"] = "Editar Género";
+}
+
+<h1>Editar Género</h1>
+
+@using (Html.BeginForm("Edit", "Genero", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="@Model.Nombre" required>
+    </div>
+
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+}

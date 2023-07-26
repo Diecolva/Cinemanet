@@ -1,0 +1,62 @@
+@model IEnumerable<Cinemanet.Models.Domain.Genero>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<h1>Géneros</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Agregar <i class="bi bi-plus"></i> </a>
+</p>
+
+<table class="table table-borderless table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>Peliculas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genero in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => genero.Nombre)
+                </td>
+                <td>
+                    @if (genero.Peliculas.Count > 0)
+                    {
+                        foreach (var pelicula in genero.Peliculas)
+                        {
+                            <span>@pelicula.Nombre</span>
+
+                            <br />
+                        }
+                    }
+                    else
+                    {
+                        <span>No hay películas asociadas a este género.</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning" asp-route-id="@genero.Id"><i class="bi bi-pencil"></i>
+                        Editar</a>
+                    <a asp-action="Details" class="btn btn-primary" asp-route-id="@genero.Id"><i
+                            class="bi bi-info-circle"></i> Detalles</a>
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@genero.Id"><i class="bi bi-trash"></i>
+                        Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

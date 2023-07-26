@@ -1,0 +1,42 @@
+@model Cinemanet.Models.Domain.Genero
+
+@{
+    ViewData["Title"] = "Detalles de Género";
+}
+
+<h1>Detalles de Género</h1>
+
+<div>
+    <h4>Género</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            Películas
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Peliculas.Count > 0)
+            {
+                foreach (var pelicula in Model.Peliculas)
+                {
+                    <span>@pelicula.Nombre</span><br />
+                }
+            }
+            else
+            {
+                <span>No hay películas asociadas a este género.</span>
+            }
+        </dd>
+    </dl>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Eliminar</a>
+        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+    </div>
+</div>

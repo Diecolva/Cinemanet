@@ -1,0 +1,21 @@
+@model Cinemanet.Models.Domain.Genero
+
+@{
+    ViewData["Title"] = "Agregar Género";
+}
+
+<h1>Agregar Género</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label for="Nombre">Nombre</label>
+                <input type="text" class="form-control" id="Nombre" name="Nombre" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        </form>
+    </div>
+</div>
